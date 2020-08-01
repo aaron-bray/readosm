@@ -12,7 +12,13 @@ include(GenerateExportHeader)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-find_package(expat REQUIRED)
+if(DEFINED expat_DIR)
+  set(expat_src CONFIG)
+  set(expat_lib expat::libexpat)
+else()
+  set(expat_lib ${expat_LIBRARY})
+endif()
+find_package(expat ${expat_src} REQUIRED)
 find_package(ZLIB REQUIRED)
 
 # Try to use upstream exported targets first
@@ -57,7 +63,7 @@ target_include_directories(readosm
 
 target_link_libraries(readosm
   PRIVATE
-  ${expat_LIBRARY}
+  ${expat_lib}
   protobuf::libprotobuf
   ZLIB::ZLIB
   )
