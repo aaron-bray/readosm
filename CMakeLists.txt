@@ -100,7 +100,9 @@ install(TARGETS readosm
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Development
   )
 
-install(FILES headers/readosm.h
+install(FILES
+    headers/readosm.h
+    ${PROJECT_BINARY_DIR}/readosm_export.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   COMPONENT Development
   )
